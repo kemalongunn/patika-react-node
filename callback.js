@@ -27,19 +27,37 @@ import fetch from "node-fetch";
 
 
 // Çekilen verilerin sırasını istediğimiz gibi verebiliriz...
-async function getData() {
-    const users = await(
-        await fetch("https://jsonplaceholder.typicode.com/users")).json();
+// async function getData() {
+//     const users = await(
+//         await fetch("https://jsonplaceholder.typicode.com/users")).json();
     
-    const post1 = await(
-        await fetch("https://jsonplaceholder.typicode.com/posts/1")).json();
+//     const post1 = await(
+//         await fetch("https://jsonplaceholder.typicode.com/posts/1")).json();
     
-    const post2 = await(
-        await fetch("https://jsonplaceholder.typicode.com/posts/2")).json();
+//     const post2 = await(
+//         await fetch("https://jsonplaceholder.typicode.com/posts/2")).json();
         
 
-    console.groupCollapsed("post1", post1);
+//     console.groupCollapsed("post1", post1);
+//     console.groupCollapsed("post2", post2);
+//     console.log("users",users);    
+// }
+// getData();
+
+import axios from "axios";
+
+//axios kullandığımız zaman jsona çevirmemize gerek kalmaz...
+async function getData() {
+    const {data: users} = await(axios("https://jsonplaceholder.typicode.com/users"));
+    
+    const {data: post1} = await(axios("https://jsonplaceholder.typicode.com/posts/1"));
+
+    
+    const {data: post2} = await(axios("https://jsonplaceholder.typicode.com/posts/2"));
+
+        
     console.groupCollapsed("post2", post2);
+    console.groupCollapsed("post1", post1);
     console.log("users",users);    
 }
 getData();
